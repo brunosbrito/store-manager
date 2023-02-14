@@ -7,4 +7,17 @@ const addNewSale = async (info) => {
   return { id, itemsSold: sales };
 };
 
-module.exports = { addNewSale };
+const getAllSales = async () => {
+  const sales = await salesModel.getAllSales();
+  return sales;
+};
+
+const getByIdSale = async (id) => {
+  const sale = await salesModel.getByIdSales(id);
+
+  console.log(id);
+  if (!sale) return null;
+  return sale;
+};
+
+module.exports = { addNewSale, getAllSales, getByIdSale };

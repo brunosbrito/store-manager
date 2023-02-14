@@ -5,4 +5,23 @@ const addNewSale = async (req, res) => {
   return res.status(201).json(sales);
 };
 
-module.exports = { addNewSale };
+const getAllSales = async (_req, res) => {
+  const data = await salesServices.getAllSales();
+  return res.status(200).json(data);
+};
+
+const getByIdSale = async (req, res) => {
+  const { id } = req.params;
+
+  const sale = await salesServices.getByIdSale(id);
+
+  console.log(id);
+  if (!sale) {
+    return res.status(404).json({
+      message: 'Sale not found',
+    });
+  }
+
+  return res.status(200).json(sale);
+};
+module.exports = { addNewSale, getAllSales, getByIdSale };
