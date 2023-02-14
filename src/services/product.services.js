@@ -15,10 +15,14 @@ const getById = async (id) => {
 const addNewProduct = async (name) => {
   const id = await productModel.addNewProduct(name);
 
-  console.log(id);
   const product = { id, name };
 
   return product;
 };
 
-module.exports = { getAll, getById, addNewProduct };
+const checkProduct = async (productid) => {
+  const product = await productModel.getById(productid);
+    if (!product) return false;
+};
+
+module.exports = { getAll, getById, addNewProduct, checkProduct };
