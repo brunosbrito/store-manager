@@ -44,3 +44,23 @@ describe('testa productControllers', function () {
     })
   })
 })
+
+describe('testa addNewProduct', function () {
+    it('caso de sucesso se criar o produto', async function () {
+       const productObj = { name: 'NewProduct'}
+      sinon.stub(productServices, 'addNewProduct').resolves(productObj);
+
+      const req = {};
+      const res = {};
+
+      req.body = {name: 'NewProduct'};
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+
+      console.log(req)
+      await productController.addNewProduct(req, res);
+      expect(res.status.calledWith(201)).to.be.true;
+      expect(res.json.calledWith(productObj)).to.be.ok;
+
+    })
+  })

@@ -4,7 +4,8 @@ const { expect } = require('chai');
 const connection = require('../../../src/models/connection')
 const productModel = require('../../../src/models/product.model');
 
-const mockAllProducts = require('../mockAllProducts')
+const mockAllProducts = require('../mockAllProducts');
+const { id } = require('../../../src/middlewares/productSchema');
 
 describe('testa products Models', function () {
   beforeEach(sinon.restore)
@@ -30,3 +31,11 @@ describe('testa products Models', function () {
     })
   })
 })
+describe('testa addNewProduct', function () {
+    it('testa se é criado um produto com o id 4', async function () {
+      const query = [{insertId: 4}];
+        sinon.stub(connection, 'query').resolves(query);
+      const product = await productModel.addNewProduct('newProduct');
+        expect(product).to.be.equal(4);
+    })
+  })

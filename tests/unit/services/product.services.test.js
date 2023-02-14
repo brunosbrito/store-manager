@@ -27,3 +27,15 @@ describe('Testa Products Sertvices', function () {
     })
   })
 })
+
+describe('testa addNewProduct', function () {
+    it('testa se é criado um novo obj com id 4 e name "NewProduct"', async function () {    
+      obj = [{isertId: 4}]
+      
+      sinon.stub(productModel, 'addNewProduct').resolves(obj);
+
+      const product = await productServices.addNewProduct('NewProduct');
+    
+      expect(product).to.be.deep.equal({ id: obj ,name : 'NewProduct' });
+    })
+  })
