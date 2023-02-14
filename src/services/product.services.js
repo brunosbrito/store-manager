@@ -25,4 +25,11 @@ const checkProduct = async (productid) => {
     if (!product) return false;
 };
 
-module.exports = { getAll, getById, addNewProduct, checkProduct };
+const updateProduct = async (id, name) => {
+  const checkId = await productModel.getById(id);
+  if (!checkId) return null;
+  const res = await productModel.updateProduct(id, name);
+  return res;
+};
+
+module.exports = { getAll, getById, addNewProduct, checkProduct, updateProduct };

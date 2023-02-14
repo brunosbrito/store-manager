@@ -20,4 +20,15 @@ const getByIdSale = async (id) => {
   return sale;
 };
 
+// const updateSales = async (saleId, saleArray) => {
+//   const id = await salesModel.getByIdSales(saleId);
+  
+//   if (!id) return null;
+
+//   const sales = await Promise.all(saleArray.map(({ productId, quantity }) => 
+//     salesModel.updateSales(saleId, productId, quantity)));
+  
+//   return { saleId, itemsUpdated: sales };
+// };
+
 module.exports = { addNewSale, getAllSales, getByIdSale };
