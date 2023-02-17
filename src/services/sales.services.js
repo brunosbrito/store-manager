@@ -15,7 +15,6 @@ const getAllSales = async () => {
 const getByIdSale = async (id) => {
   const sale = await salesModel.getByIdSales(id);
 
-  console.log(id);
   if (!sale) return null;
   return sale;
 };
@@ -27,15 +26,15 @@ const deleteSales = async (id) => {
   return res;
 };
 
-// const updateSales = async (saleId, saleArray) => {
-//   const id = await salesModel.getByIdSales(saleId);
+const updateSales = async (saleId, saleArray) => {
+  const id = await salesModel.getByIdSales(saleId);
   
-//   if (!id) return null;
+  if (!id) return null;
 
-//   const sales = await Promise.all(saleArray.map(({ productId, quantity }) => 
-//     salesModel.updateSales(saleId, productId, quantity)));
+  const sales = await Promise.all(saleArray.map(({ productId, quantity }) =>
+    salesModel.updateSales(saleId, productId, quantity)));
   
-//   return { saleId, itemsUpdated: sales };
-// };
+  return { saleId, itemsUpdated: sales };
+};
 
-module.exports = { addNewSale, getAllSales, getByIdSale, deleteSales };
+module.exports = { addNewSale, getAllSales, getByIdSale, deleteSales, updateSales };

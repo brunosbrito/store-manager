@@ -9,6 +9,6 @@ route.post('/', salesMidd, checkProductId, salesController.addNewSale);
 route.get('/', salesController.getAllSales);
 route.get('/:id', salesController.getByIdSale);
 route.delete('/:id', salesController.deleteSales);
-// route.put('/:id', salesController.updateSales);
+route.put('/:id', salesMidd, checkProductId, salesController.updateSales);
 
 module.exports = route;

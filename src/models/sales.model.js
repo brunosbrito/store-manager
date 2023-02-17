@@ -36,7 +36,6 @@ const getByIdSales = async (id) => {
     [id],
   );
 
-  console.log(id);
   if (result.length === 0) return null;
   return result;
 };
@@ -50,14 +49,15 @@ const deleteSales = async (id) => {
  return { id };
 };
 
-// const updateSales = async (saleId, productId, quantity) => {
-//   await connection.query(
-//     `UPDATE StoreManager.sales_products 
-//     SET product_id = ?, quantity = ? 
-//     WHERE sale_id = ? AND product_id = ?`,
-//     [productId, quantity, productId],
-//   );
-//   return { productId, quantity };
-// };
+const updateSales = async (saleId, productId, quantity) => {
+  console.log(+(quantity));
+  await connection.query(
+    `UPDATE StoreManager.sales_products 
+    SET product_id = ?, quantity = ? 
+    WHERE sale_id = ? AND product_id = ?`,
+    [productId, quantity, saleId, productId],
+  );
+  return { productId, quantity };
+};
 
-module.exports = { addNewSale, createNewSale, getAllSales, getByIdSales, deleteSales };
+module.exports = { addNewSale, createNewSale, getAllSales, getByIdSales, deleteSales, updateSales };
