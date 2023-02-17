@@ -25,6 +25,18 @@ const getByIdSale = async (req, res) => {
   return res.status(200).json(sale);
 };
 
+const deleteSales = async (req, res) => {
+  const { id } = req.params;
+
+  const sale = await salesServices.deleteSales(id);
+  if (!sale) {
+    return res.status(404).json({
+      message: 'Sale not found',
+    });
+  }
+  return res.status(204).json();
+};
+
 // const updateSales = async (req, res) => {
 //   const { id } = req.params;
 //   const newSale = await salesServices.updateSales(id, req.body);
@@ -36,4 +48,4 @@ const getByIdSale = async (req, res) => {
 
 //   return res.status(200).json(newSale);
 // };
-module.exports = { addNewSale, getAllSales, getByIdSale };
+module.exports = { addNewSale, getAllSales, getByIdSale, deleteSales };

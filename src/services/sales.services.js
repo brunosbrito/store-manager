@@ -20,6 +20,13 @@ const getByIdSale = async (id) => {
   return sale;
 };
 
+const deleteSales = async (id) => {
+  const saleId = await salesModel.getByIdSales(id);
+  if (!saleId) return null;
+  const res = await salesModel.deleteSales(id);
+  return res;
+};
+
 // const updateSales = async (saleId, saleArray) => {
 //   const id = await salesModel.getByIdSales(saleId);
   
@@ -31,4 +38,4 @@ const getByIdSale = async (id) => {
 //   return { saleId, itemsUpdated: sales };
 // };
 
-module.exports = { addNewSale, getAllSales, getByIdSale };
+module.exports = { addNewSale, getAllSales, getByIdSale, deleteSales };
