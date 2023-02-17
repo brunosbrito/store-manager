@@ -5,6 +5,8 @@ const connection = require('../../../src/models/connection');
 const salesModel = require('../../../src/models/sales.model')
 const saleServices = require('../../../src/services/sales.services')
 
+const saleAllMock = require('../mockAllSales')
+
 describe('testa sales.services', function () {
   this.beforeEach(sinon.restore);
   describe('testa addNewsale', function () {
@@ -22,4 +24,24 @@ describe('testa sales.services', function () {
       expect(sale).to.have.all.keys('id', 'itemsSold')
     })
   })
+
+  describe('teste de updateSales', () => {
+    it('testa se atualizado o sale', async () => {
+      sinon.stub(salesModel, 'updateSales').resolves({ productId: 1, quantity: 5 });
+    
+      const sale = await saleServices.updateSales(2, [{ productId: 1, quantity: 10 }]);
+      console.log(sale)
+      expect(sale).to.be.an('object');
+    })
+  })
 })
+
+ describe('teste de deleteSales', function ()  {
+    it('testa caso de sucesso', async function() {
+      
+      sinon.stub(salesModel, 'deleteSales').resolves({ id: 1 });
+      
+      const sale = await saleServices.deleteSales(1);
+      
+    })
+  })

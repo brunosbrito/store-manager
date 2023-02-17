@@ -26,6 +26,30 @@ describe('Testa Products Sertvices', function () {
      expect(product).to.be.all.keys('id','name');
     })
   })
+
+  describe('testa updateProduct', function () {
+    it('testa se é atualizado o product na chave name', async function () {
+      const query = { id: 1, name: "Machado do Thor" };
+      
+      sinon.stub(productModel, 'getById').resolves(query);
+      sinon.stub(productModel, 'updateProduct').resolves(query);
+      const product = await productServices.updateProduct(1, "Capa do Dr Estranho");
+      
+      expect(product).to.be.an('object');
+    })
+  }) 
+
+  describe('testa deleteProduct', function () {
+    it('testa se é deletado o produto', async function () {
+      const query = { id: 1};
+      
+      sinon.stub(productModel, 'deleteProduct').resolves(query);
+      const product = await productServices.deleteProduct(1);
+      expect(product).to.be.deep.equal({id:1})
+      
+    })
+  }) 
+
 })
 
 describe('testa addNewProduct', function () {
@@ -38,4 +62,5 @@ describe('testa addNewProduct', function () {
     
       expect(product).to.be.deep.equal({ id: obj ,name : 'NewProduct' });
     })
-  })
+})
+  

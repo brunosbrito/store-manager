@@ -43,9 +43,7 @@ describe('testa productControllers', function () {
 
     })
   })
-})
-
-describe('testa addNewProduct', function () {
+  describe('testa addNewProduct', function () {
     it('caso de sucesso se criar o produto', async function () {
        const productObj = { name: 'NewProduct'}
       sinon.stub(productServices, 'addNewProduct').resolves(productObj);
@@ -62,5 +60,27 @@ describe('testa addNewProduct', function () {
       expect(res.status.calledWith(201)).to.be.true;
       expect(res.json.calledWith(productObj)).to.be.ok;
 
+    })
+  })
+
+})
+
+describe('testa deleteProduct', function () {
+    it('caso de sucesso de deletar o produto', async function () {
+    const productObj = { id: 1, name: 'produtoZ' };
+      sinon.stub(productServices, 'updateProduct').resolves(productObj);
+
+      const req = {};
+      const res = {};
+
+      req.params = { id: 1 };
+      req.body = { name: 'ProdutoZ' }
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+
+      await productController.updateProduct(req, res);
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(productObj)).to.be.true;
+      
     })
   })

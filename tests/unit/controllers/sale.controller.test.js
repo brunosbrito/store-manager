@@ -7,6 +7,7 @@ const salesServices = require('../../../src/services/sales.services')
 const saleController = require('../../../src/controllers/sales.controller')
 const mockAllSales = require('../mockAllSales')
 
+
 describe('testa sales Controller', function () {
   this.beforeEach(sinon.restore);
   describe('testa addNewsale', function () {
@@ -38,3 +39,38 @@ describe('testa sales Controller', function () {
     })
   })
 })
+
+describe("testa getAllSales", () => {
+  it('caso OK', async () => {
+      sinon.stub(salesServices, 'getAllSales').resolves(mockAllSales);
+
+      const req = {};
+      const res = {};
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+
+      await saleController.getAllSales(req, res);
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(mockAllSales)).to.be.true;
+    })
+
+});
+
+  describe("teste de getById", () => {
+    it('caso OK', async () => {
+      sinon.stub(salesServices, 'getByIdSale').resolves(mockAllSales);
+
+      const req = {};
+      const res = {};
+      
+      req.params = { id: 2 };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+
+      await saleController.getByIdSale(req, res);
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(mockAllSales)).to.be.true;
+    })
+      
+  })
