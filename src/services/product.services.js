@@ -39,4 +39,22 @@ const deleteProduct = async (id) => {
   return res;
 };
 
-module.exports = { getAll, getById, addNewProduct, checkProduct, updateProduct, deleteProduct };
+const searchProduct = async (q) => {
+  const data = await productModel.getAll();
+  console.log(data);
+  const result = q
+    ? data.filter(({ name }) => name.includes(q))
+    : data;
+  
+  return result;
+};
+
+module.exports = {
+  getAll,
+  getById,
+  addNewProduct,
+  checkProduct,
+  updateProduct,
+  deleteProduct,
+  searchProduct,
+};
